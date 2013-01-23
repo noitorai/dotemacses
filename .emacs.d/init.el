@@ -1,15 +1,26 @@
-;; **********************************************************************
-;;   Main
-;; **********************************************************************
+;;;; path
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
-;; ~/.emacs.d 以下全てを load-path に追加
-(defconst my-elisp-directory "~/.emacs.d" "The directory for my elisp file.")
-(dolist (dir (let ((dir (expand-file-name my-elisp-directory)))
-               (list dir (format "%s%d" dir emacs-major-version))))
-  (when (and (stringp dir) (file-directory-p dir))
-    (let ((default-directory dir))
-      (setq load-path (cons default-directory load-path))
-      (normal-top-level-add-subdirs-to-load-path))))
+;;;; auto-install
+;; for update
+;; (install-elisp-from-emacswiki "auto-install.el")
+
+(require 'auto-install)
+
+;; add auto-install elisps to load-path 
+(add-to-list 'load-path auto-install-directory)
+
+;; Update package name when start up. But this setup is not necessary,
+;; because AutoInstall will automatically update package name when you
+;; just first call `auto-install-from-emacswiki', This setup just
+;; avoid *delay* when you first call `auto-install-from-emacswiki'.
+;; (auto-install-update-emacswiki-package-name t)
+
+;; install-elisp.el compatibility mode
+(auto-install-compatibility-setup)
+
+;; gather ediff buffers together in one frame
+(setq ediff-window-setup-function 'ediff-setup-window-plain)
 
 ;; **********************************************************************
 ;;   View
