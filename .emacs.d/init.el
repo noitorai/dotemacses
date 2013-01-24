@@ -1,19 +1,29 @@
-;; **********************************************************************
-;;   Main
-;; **********************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; main ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ~/.emacs.d 以下全てを load-path に追加
-(defconst my-elisp-directory "~/.emacs.d" "The directory for my elisp file.")
-(dolist (dir (let ((dir (expand-file-name my-elisp-directory)))
-               (list dir (format "%s%d" dir emacs-major-version))))
-  (when (and (stringp dir) (file-directory-p dir))
-    (let ((default-directory dir))
-      (setq load-path (cons default-directory load-path))
-      (normal-top-level-add-subdirs-to-load-path))))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
-;; **********************************************************************
-;;   View
-;; **********************************************************************
+;;;; auto-install
+;; execute below code to update
+;; (install-elisp-from-emacswiki "auto-install.el")
+
+(require 'auto-install)
+
+;; add auto-install elisps to load-path 
+(add-to-list 'load-path auto-install-directory)
+
+;; install-elisp.el compatibility mode
+(auto-install-compatibility-setup)
+
+;; gather ediff buffers together in one frame
+(setq ediff-window-setup-function 'ediff-setup-window-plain)
+
+;;;; byte compile
+(require 'auto-async-byte-compile)
+;; ignore pattern
+(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; view ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; 列数表示                                                                     
 (column-number-mode t)
@@ -31,14 +41,6 @@
   (recenter))
 (global-set-key "\C-c\C-l" 'toggle-truncate-lines)  
 
-;; TODO elscreen
-;;(setq elscreen-prefix-key "\C-z")
-;;(setq elscreen-display-tab nil)
-;;(load "elscreen" "ElScreen" t)
-;;(add-hook 'term-mode-hook '(lambda ()
-;;                             (define-key term-raw-map "\C-z"
-;;                               (lookup-key (current-global-map) "\C-z"))))
-
 ;; FIXME elscreen と合わせて要不要を検討(使用するなら Action へ移動
 ;; ;;C-zをtermに強奪されてないようにする                                   
 ;; (add-hook 'term-mode-hook '(lambda ()                    
@@ -54,10 +56,7 @@
 ;; (setq jaspace-alternate-eol-string "↓ \n")
 ;; ;; タブ記号を表示。                                                             
 ;; (setq jaspace-highlight-tabs t)  ; highlight tabs                               
-
-;; **********************************************************************
-;;   Action
-;; **********************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; action ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-h を Backspace に
 (global-set-key "\C-h" 'delete-backward-char)
