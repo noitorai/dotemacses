@@ -1,8 +1,9 @@
-;;;; path
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; path ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
 ;;;; auto-install
-;; for update
+;; execute below code to update
 ;; (install-elisp-from-emacswiki "auto-install.el")
 
 (require 'auto-install)
@@ -10,21 +11,13 @@
 ;; add auto-install elisps to load-path 
 (add-to-list 'load-path auto-install-directory)
 
-;; Update package name when start up. But this setup is not necessary,
-;; because AutoInstall will automatically update package name when you
-;; just first call `auto-install-from-emacswiki', This setup just
-;; avoid *delay* when you first call `auto-install-from-emacswiki'.
-;; (auto-install-update-emacswiki-package-name t)
-
 ;; install-elisp.el compatibility mode
 (auto-install-compatibility-setup)
 
 ;; gather ediff buffers together in one frame
 (setq ediff-window-setup-function 'ediff-setup-window-plain)
 
-;; **********************************************************************
-;;   View
-;; **********************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; view ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; 列数表示                                                                     
 (column-number-mode t)
@@ -42,14 +35,6 @@
   (recenter))
 (global-set-key "\C-c\C-l" 'toggle-truncate-lines)  
 
-;; TODO elscreen
-;;(setq elscreen-prefix-key "\C-z")
-;;(setq elscreen-display-tab nil)
-;;(load "elscreen" "ElScreen" t)
-;;(add-hook 'term-mode-hook '(lambda ()
-;;                             (define-key term-raw-map "\C-z"
-;;                               (lookup-key (current-global-map) "\C-z"))))
-
 ;; FIXME elscreen と合わせて要不要を検討(使用するなら Action へ移動
 ;; ;;C-zをtermに強奪されてないようにする                                   
 ;; (add-hook 'term-mode-hook '(lambda ()                    
@@ -65,10 +50,7 @@
 ;; (setq jaspace-alternate-eol-string "↓ \n")
 ;; ;; タブ記号を表示。                                                             
 ;; (setq jaspace-highlight-tabs t)  ; highlight tabs                               
-
-;; **********************************************************************
-;;   Action
-;; **********************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; action ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-h を Backspace に
 (global-set-key "\C-h" 'delete-backward-char)
