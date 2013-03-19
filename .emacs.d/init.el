@@ -25,6 +25,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; view ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Emacs フォントサイズ設定
+(if (>= emacs-major-version 24)
+(progn
+  (set-frame-font "IPAゴシック-10"))
+(if (and (>= emacs-major-version 23) (< emacs-major-version 24))
+(progn
+  (set-frame-font "Monospace-9")
+  (set-fontset-font (frame-parameter nil 'font)
+                    'japanese-jisx0208
+                    '("IPAゴシック" . "unicode-bmp")))))
+
 ;; 列数表示                                                                     
 (column-number-mode t)
 
@@ -39,7 +50,7 @@
       (setq truncate-lines nil)
     (setq truncate-lines t))
   (recenter))
-(global-set-key "\C-c\C-l" 'toggle-truncate-lines)  
+(global-set-key "\C-c\C-l" 'toggle-truncate-lines)
 
 ;; FIXME elscreen と合わせて要不要を検討(使用するなら Action へ移動
 ;; ;;C-zをtermに強奪されてないようにする                                   
