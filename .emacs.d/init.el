@@ -2,6 +2,11 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
+;;  loading init-local.el if exists
+(setq local-config 
+      (concat (car (cdr (split-string (pwd)))) "init-local.el"))
+(if (file-readable-p local-config) (load local-config))
+
 ;;;; auto-install
 ;; execute below code to update
 ;; (install-elisp-from-emacswiki "auto-install.el")
