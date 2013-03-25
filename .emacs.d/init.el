@@ -44,8 +44,19 @@
 ;; 列数表示
 (column-number-mode t)
 
+;; 行番号表示
+(linum-mode t)
+
 ;;リージョンに色を付ける
-;;(setq transient-mark-mode t)
+;; default で t
+(setq transient-mark-mode t)
+
+;; タブの代わりに半角スペースを使う
+(setq-default tab-width 4 indent-tabs-mode nil)
+
+;; タブストップ位置の設定
+(setq-default tab-stop-list
+  '(4 8 12 16 20))
 
 ;; 折り返し表示 ON/OFF
 (defun toggle-truncate-lines ()
