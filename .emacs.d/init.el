@@ -68,6 +68,9 @@
   (recenter))
 (global-set-key "\C-c\C-l" 'toggle-truncate-lines)
 
+;; ビープ音を画面のフラッシュに変更
+(setq visible-bell t)
+
 ;; FIXME elscreen と合わせて要不要を検討(使用するなら Action へ移動
 ;; ;;C-zをtermに強奪されてないようにする
 ;; (add-hook 'term-mode-hook '(lambda ()
