@@ -2,11 +2,6 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
-;;  loading init-local.el if exists
-(setq local-config 
-      (concat (car (cdr (split-string (pwd)))) "init-local.el"))
-(if (file-readable-p local-config) (load local-config))
-
 ;;;; auto-install
 ;; execute below code to update
 ;; (install-elisp-from-emacswiki "auto-install.el")
@@ -39,6 +34,10 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
+;;  loading init-local.el if exists
+(setq local-config  "~/.emacs.d/init-local.el")
+(if (file-readable-p local-config) (load local-config))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; view ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Emacs フォントサイズ設定
@@ -61,13 +60,6 @@
 ;;リージョンに色を付ける
 ;; default で t
 (setq transient-mark-mode t)
-
-;; タブの代わりに半角スペースを使う
-(setq-default tab-width 4 indent-tabs-mode nil)
-
-;; タブストップ位置の設定
-(setq-default tab-stop-list
-  '(4 8 12 16 20))
 
 ;; 折り返し表示 ON/OFF
 (defun toggle-truncate-lines ()
