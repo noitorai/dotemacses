@@ -79,14 +79,17 @@
   (recenter))
 (global-set-key "\C-c\C-l" 'toggle-truncate-lines)
 
-;; ビープ音を画面のフラッシュに変更
-(setq visible-bell t)
+;;; Elscreen
+;; Installation:
+;;  execute the following code
+;;    (package-list-packages)
+;;  move to elscreen and press I, x and yes
+(elscreen-start)
 
-;; FIXME elscreen と合わせて要不要を検討(使用するなら Action へ移動
-;; ;;C-zをtermに強奪されてないようにする
-;; (add-hook 'term-mode-hook '(lambda ()
-;;                              (define-key term-raw-map "\C-z"
-;;                                (lookup-key (current-global-map) "\C-z"))))
+;; C-zをtermに強奪されてないようにする                                   
+(add-hook 'term-mode-hook '(lambda ()                    
+                             (define-key term-raw-map "\C-z"      
+                               (lookup-key (current-global-map) "\C-z"))))
 
 ;; TODO: 導入を検討 jaspace-mode
 ;; ;; 切り替えは M-x jaspace-mode-{on,off}
