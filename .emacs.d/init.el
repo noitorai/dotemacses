@@ -2,7 +2,9 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
-;;;; auto-install
+;;; 
+;;; auto-install
+;;; 
 ;; execute below code to update
 ;; (install-elisp-from-emacswiki "auto-install.el")
 
@@ -16,6 +18,7 @@
 
 ;; gather ediff buffers together in one frame
 (setq ediff-window-setup-function 'ediff-setup-window-plain)
+
 
 ;;;; byte compile
 (require 'auto-async-byte-compile)
@@ -34,7 +37,7 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-;;  loading init-local.el if exists
+;;;  loading init-local.el if exists
 (setq local-config  "~/.emacs.d/init-local.el")
 (if (file-readable-p local-config) (load local-config))
 
@@ -106,10 +109,12 @@
 ;; 対応する括弧をハイライト
 (show-paren-mode t)
 
-;; redo
-(when (require 'redo nil t)
-  (define-key ctl-x-map (if window-system "U" "r") 'redo)
-  (define-key global-map [?\C-.] 'redo))
+;; redo+.el
+(require 'redo+)
+(global-set-key (kbd "C-M-/") 'redo)
+(setq undo-no-read t) ; 過去の undo が redo されないように
+(setq undo-limit 600000)
+(setq undo-strong-limit 900000)
 
 ;; ビープ音を画面のフラッシュに変更
 (setq visible-bell t)
