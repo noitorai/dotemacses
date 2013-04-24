@@ -127,6 +127,11 @@
 (autoload 'sense-region-on "sense-region"
   "System to toggle region and regtangle." t nil)
 
+;; C-zをtermに強奪されてないようにする
+(add-hook 'term-mode-hook '(lambda ()
+                             (define-key term-raw-map "\C-z"
+                               (lookup-key (current-global-map) "\C-z"))))
+
 ;; Other
 
 
