@@ -122,10 +122,11 @@
 ;; ビープ音を画面のフラッシュに変更
 (setq visible-bell t)
 
+;; 矩形選択モードを使いやすく
+;; init.el 導入検討中
+(autoload 'sense-region-on "sense-region"
+  "System to toggle region and regtangle." t nil)
+
 ;; Other
 
-;; TODO 導入を検討する
-;; 導入する場合は、Motion section へ
-;; ;; 矩形選択モードを使いやすく
-;; (autoload 'sense-region-on "sense-region"
-;;   "System to toggle region and regtangle." t nil)
+
