@@ -86,7 +86,7 @@
                              (define-key term-raw-map "\C-z"      
                                (lookup-key (current-global-map) "\C-z"))))
 
-;; ビープ音を画面のフラッシュに変更
+;;; ビープ音を画面のフラッシュに変更
 (setq visible-bell t)
 
 ;; TODO: 導入を検討 jaspace-mode
