@@ -41,6 +41,11 @@
 (setq local-config  "~/.emacs.d/init-local.el")
 (if (file-readable-p local-config) (load local-config))
 
+;;; integrate kill ring and clipboard
+(cond (window-system
+(setq x-select-enable-clipboard t)
+))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; view ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Emacs フォントサイズ設定
@@ -133,11 +138,9 @@
                              (define-key term-raw-map "\C-z"
                                (lookup-key (current-global-map) "\C-z"))))
 
-
 ;;; sequential-command.el
 ;; M-{u,l} で直前の単語を大文字/小文字化
 (require 'sequential-command-config)
 (sequential-command-setup-keys)
-
 
 ;; Other
