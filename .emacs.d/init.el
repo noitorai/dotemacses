@@ -104,6 +104,9 @@
 ;; タブ記号を表示。
 (setq jaspace-highlight-tabs t)  ; highlight tabs
 
+;; デフォルトでは折り返さないようにする
+(setq truncate-lines nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; action ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-h を Backspace に
