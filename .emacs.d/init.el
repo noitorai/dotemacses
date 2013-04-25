@@ -89,15 +89,16 @@
 ;;; ビープ音を画面のフラッシュに変更
 (setq visible-bell t)
 
-;; TODO: 導入を検討 jaspace-mode
-;; ;; 切り替えは M-x jaspace-mode-{on,off}
-;; (require 'jaspace)
-;; ;; 全角空白を表示させる。
-;; (setq jaspace-alternate-jaspace-string "□ ")
-;; ;; 改行記号を表示させる。
-;; (setq jaspace-alternate-eol-string "↓ \n")
-;; ;; タブ記号を表示。
-;; (setq jaspace-highlight-tabs t)  ; highlight tabs
+;;; jaspace-mode
+;; 切り替えは M-x jaspace-mode-{on,off}
+(require 'jaspace)
+;; 全角空白を表示させる。
+(setq jaspace-alternate-jaspace-string "□ ")
+;; 改行記号を表示させる。
+(setq jaspace-alternate-eol-string "↓ \n")
+;; タブ記号を表示。
+(setq jaspace-highlight-tabs t)  ; highlight tabs
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; action ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-h を Backspace に
@@ -133,5 +134,3 @@
                                (lookup-key (current-global-map) "\C-z"))))
 
 ;; Other
-
-
