@@ -133,4 +133,11 @@
                              (define-key term-raw-map "\C-z"
                                (lookup-key (current-global-map) "\C-z"))))
 
+
+;;; sequential-command.el
+;; M-{u,l} で直前の単語を大文字/小文字化
+(require 'sequential-command-config)
+(sequential-command-setup-keys)
+
+
 ;; Other
