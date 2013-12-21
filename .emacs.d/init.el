@@ -17,7 +17,7 @@
 (auto-install-compatibility-setup)
 
 ;; gather ediff buffers together in one frame
-(setq ediff-window-setup-function 'ediff-setup-window-plain)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 
 ;;;; byte compile
