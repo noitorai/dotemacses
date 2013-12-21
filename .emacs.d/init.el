@@ -2,7 +2,9 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 
-;;;; auto-install
+;;; 
+;;; auto-install
+;;; 
 ;; execute below code to update
 ;; (install-elisp-from-emacswiki "auto-install.el")
 
@@ -16,6 +18,7 @@
 
 ;; gather ediff buffers together in one frame
 (setq ediff-window-setup-function 'ediff-setup-window-plain)
+
 
 ;;;; byte compile
 (require 'auto-async-byte-compile)
@@ -34,9 +37,14 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-;;  loading init-local.el if exists
+;;;  loading init-local.el if exists
 (setq local-config  "~/.emacs.d/init-local.el")
 (if (file-readable-p local-config) (load local-config))
+
+;;; integrate kill ring and clipboard
+(cond (window-system
+(setq x-select-enable-clipboard t)
+))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; view ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -83,15 +91,22 @@
                              (define-key term-raw-map "\C-z"      
                                (lookup-key (current-global-map) "\C-z"))))
 
-;; TODO: 導入を検討 jaspace-mode
-;; ;; 切り替えは M-x jaspace-mode-{on,off}
-;; (require 'jaspace)
-;; ;; 全角空白を表示させる。
-;; (setq jaspace-alternate-jaspace-string "□ ")
-;; ;; 改行記号を表示させる。
-;; (setq jaspace-alternate-eol-string "↓ \n")
-;; ;; タブ記号を表示。
-;; (setq jaspace-highlight-tabs t)  ; highlight tabs
+;;; ビープ音を画面のフラッシュに変更
+(setq visible-bell t)
+
+;;; jaspace-mode
+;; 切り替えは M-x jaspace-mode-{on,off}
+(require 'jaspace)
+;; 全角空白を表示させる。
+(setq jaspace-alternate-jaspace-string "□ ")
+;; 改行記号を表示させる。
+(setq jaspace-alternate-eol-string "↓ \n")
+;; タブ記号を表示。
+(setq jaspace-highlight-tabs t)  ; highlight tabs
+
+;; デフォルトでは折り返さないようにする
+(setq truncate-lines nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; action ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; C-h を Backspace に
@@ -106,18 +121,29 @@
 ;; 対応する括弧をハイライト
 (show-paren-mode t)
 
-;; redo
-(when (require 'redo nil t)
-  (define-key ctl-x-map (if window-system "U" "r") 'redo)
-  (define-key global-map [?\C-.] 'redo))
+;; redo+.el
+(require 'redo+)
+(global-set-key (kbd "C-M-/") 'redo)
+(setq undo-no-read t) ; 過去の undo が redo されないように
+(setq undo-limit 600000)
+(setq undo-strong-limit 900000)
 
 ;; ビープ音を画面のフラッシュに変更
 (setq visible-bell t)
 
-;; Other
+;; 矩形選択モードを使いやすく
+;; init.el 導入検討中
+(autoload 'sense-region-on "sense-region"
+  "System to toggle region and regtangle." t nil)
 
-;; TODO 導入を検討する
-;; 導入する場合は、Motion section へ
-;; ;; 矩形選択モードを使いやすく
-;; (autoload 'sense-region-on "sense-region"
-;;   "System to toggle region and regtangle." t nil)
+;; C-zをtermに強奪されてないようにする
+(add-hook 'term-mode-hook '(lambda ()
+                             (define-key term-raw-map "\C-z"
+                               (lookup-key (current-global-map) "\C-z"))))
+
+;;; sequential-command.el
+;; M-{u,l} で直前の単語を大文字/小文字化
+(require 'sequential-command-config)
+(sequential-command-setup-keys)
+
+;; Other
