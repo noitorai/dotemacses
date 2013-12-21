@@ -17,7 +17,7 @@
 (auto-install-compatibility-setup)
 
 ;; gather ediff buffers together in one frame
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(defvar ediff-window-setup-function 'ediff-setup-windows-plain)
 
 
 ;;;; byte compile
@@ -38,7 +38,7 @@
 (package-initialize)
 
 ;;;  loading init-local.el if exists
-(setq local-config  "~/.emacs.d/init-local.el")
+(defvar local-config  "~/.emacs.d/init-local.el")
 (if (file-readable-p local-config) (load local-config))
 
 ;;; integrate kill ring and clipboard
@@ -84,6 +84,7 @@
 ;;  execute the following code
 ;;    (package-list-packages)
 ;;  move to elscreen and press I, x and yes
+(declare-function elscreen-start "elscreen.el" nil)
 (elscreen-start)
 
 ;; C-zをtermに強奪されてないようにする                                   
@@ -124,7 +125,7 @@
 ;; redo+.el
 (require 'redo+)
 (global-set-key (kbd "C-M-/") 'redo)
-(setq undo-no-read t) ; 過去の undo が redo されないように
+(defvar undo-no-read t) ; 過去の undo が redo されないように
 (setq undo-limit 600000)
 (setq undo-strong-limit 900000)
 
