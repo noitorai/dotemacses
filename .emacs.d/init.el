@@ -1,13 +1,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; main ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 
 ;;; 
 ;;; auto-install
 ;;; 
 ;; execute below code to update
 ;; (install-elisp-from-emacswiki "auto-install.el")
-
 (require 'auto-install)
 
 ;; add auto-install elisps to load-path
@@ -20,11 +19,11 @@
 (defvar ediff-window-setup-function 'ediff-setup-windows-plain)
 
 
-;;;; byte compile
-(require 'auto-async-byte-compile)
-;; ignore pattern
-(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+;; ;;;; byte compile
+;; (require 'auto-async-byte-compile)
+;; ;; ignore pattern
+;; (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+;; (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 ;;; package.el
 ;; Installation for Emacs24:
@@ -97,13 +96,13 @@
 
 ;;; jaspace-mode
 ;; 切り替えは M-x jaspace-mode-{on,off}
-(require 'jaspace)
-;; 全角空白を表示させる。
-(setq jaspace-alternate-jaspace-string "□ ")
-;; 改行記号を表示させる。
-(setq jaspace-alternate-eol-string "↓ \n")
-;; タブ記号を表示。
-(setq jaspace-highlight-tabs t)  ; highlight tabs
+;; (require 'jaspace)
+;; ;; 全角空白を表示させる。
+;; (setq jaspace-alternate-jaspace-string "□")
+;; ;; 改行記号を表示させる。
+;; (setq jaspace-alternate-eol-string "↓ \n")
+;; ;; タブ記号を表示。
+;; (setq jaspace-highlight-tabs t)  ; highlight tabs
 
 ;; デフォルトでは折り返さないようにする
 (setq truncate-lines nil)
@@ -112,6 +111,7 @@
 
 ;; C-h を Backspace に
 (global-set-key "\C-h" 'delete-backward-char)
+;; (global-set-key (kbd "C-h") 'delete-backward-char)
 
 ;;タブの代わりに半角スペースを使う
 (setq-default tab-width 4 indent-tabs-mode nil)
