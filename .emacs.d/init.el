@@ -50,7 +50,7 @@
 ;; Emacs フォントサイズ設定
 (if (>= emacs-major-version 24)
 (progn
-  (set-frame-font "IPAゴシック-10"))
+  (set-frame-font "UmePlus Gothic-9"))
 (if (and (>= emacs-major-version 23) (< emacs-major-version 24))
 (progn
   (set-frame-font "Monospace-9")
