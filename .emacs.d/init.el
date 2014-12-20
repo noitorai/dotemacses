@@ -86,23 +86,45 @@
 (declare-function elscreen-start "elscreen.el" nil)
 (elscreen-start)
 
-;; C-zをtermに強奪されてないようにする                                   
-(add-hook 'term-mode-hook '(lambda ()                    
-                             (define-key term-raw-map "\C-z"      
+;; C-zをtermに強奪されてないようにする
+(add-hook 'term-mode-hook '(lambda ()
+                             (define-key term-raw-map "\C-z"
                                (lookup-key (current-global-map) "\C-z"))))
 
 ;;; ビープ音を画面のフラッシュに変更
 (setq visible-bell t)
 
-;;; jaspace-mode
-;; 切り替えは M-x jaspace-mode-{on,off}
-;; (require 'jaspace)
-;; ;; 全角空白を表示させる。
-;; (setq jaspace-alternate-jaspace-string "□")
-;; ;; 改行記号を表示させる。
-;; (setq jaspace-alternate-eol-string "↓ \n")
-;; ;; タブ記号を表示。
-;; (setq jaspace-highlight-tabs t)  ; highlight tabs
+;;; whitespace-mode
+;;
+;; 全角スペース -> □
+;; タブ         -> ____
+;; 改行         -> ⇓
+;;
+(require 'whitespace)
+(set-face-foreground 'whitespace-space "cornsilk3")
+(set-face-background 'whitespace-space nil)
+(set-face-bold-p 'whitespace-space t)
+(set-face-foreground 'whitespace-tab "cornsilk3")
+(set-face-underline 'whitespace-tab t)
+(set-face-foreground 'whitespace-newline "cornsilk3")
+(set-face-background 'whitespace-newline nil)
+(set-face-bold-p 'whitespace-newline t)
+
+(setq whitespace-style '(face tabs tab-mark spaces space-mark newline newline-mark))
+(setq whitespace-space-regexp "\\(\x3000+\\)")
+(setq whitespace-display-mappings
+      '(
+        (space-mark   ?\x3000 [?\□])
+        ;; WARNING: the mapping below has a problem.
+        ;; When a TAB occupies exactly one column, it will display the
+        ;; character ?\xBB at that column followed by a TAB which goes to
+        ;; the next TAB column.
+        ;; If this is a problem for you, please, comment the line below.
+        ;; (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])	; tab - left quote mark
+        (tab-mark     ?\t     [?\t])
+        (newline-mark ?\n     [?\x21d3 ?\n])
+        ))
+(global-whitespace-mode 1)
 
 ;; デフォルトでは折り返さないようにする
 (setq truncate-lines nil)
