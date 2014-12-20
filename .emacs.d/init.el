@@ -18,12 +18,11 @@
 ;; gather ediff buffers together in one frame
 (defvar ediff-window-setup-function 'ediff-setup-windows-plain)
 
-
-;; ;;;; byte compile
-;; (require 'auto-async-byte-compile)
-;; ;; ignore pattern
-;; (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-;; (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+;;;; byte compile
+(require 'auto-async-byte-compile)
+;; ignore pattern
+(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 ;;; package.el
 ;; Installation for Emacs24:
