@@ -168,4 +168,8 @@
 (require 'sequential-command-config)
 (sequential-command-setup-keys)
 
+;;; sticky.el
+(require 'sticky)
+(use-sticky-key ";" sticky-alist:ja)
+
 ;; Other
