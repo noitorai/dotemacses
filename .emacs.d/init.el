@@ -178,3 +178,4 @@
 (add-hook 'skk-mode-hook 'skk-mode-hook--unset-key)
 
 ;; Other
+(set-default-coding-systems 'utf-8)
